@@ -4,7 +4,6 @@ public class Account {
 
     private int genAccountNum;
     private double balance;
-    private Customer salary;
 
     public double getBalance() {
         return balance;
@@ -25,7 +24,7 @@ public class Account {
     public void withdraw(double withdraw) {
         balance -= withdraw;
     }
-    public void addSalary() {
+    public void addSalary(Customer salary) {
         balance += salary.getSalary();
     }
     public int getGenAccountNum() {
