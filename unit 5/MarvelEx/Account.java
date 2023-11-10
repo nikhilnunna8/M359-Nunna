@@ -32,12 +32,9 @@ public class Account {
     }
     public double afterInterest(int years){
         for (int i = 0; i < years; i++) {
-            System.out.println("Year " + i + "\n");
             balance += balance * 0.012;
-            System.out.println("Balance: $" + balance);
         }
         return balance;
     }
-
-
 }
+

@@ -14,43 +14,64 @@ public class Bank {
         double deposit = scan.nextDouble();
         scan.nextLine();
         Account custr = new Account(deposit);
+        System.out.println("This will be the LAST TIME you will see your Account number: " + custr.getGenAccountNum());
+
 
         System.out.print("What is your Monthly Salary: ");
         double salaryAmt = scan.nextDouble();
         Customer cust1 = new Customer(name, salaryAmt, custr);
         scan.nextLine();
-        int totMonths = 0;
-        while(true){
-            System.out.print("Do you want to deposit(y is yes): ");
 
-            String y = scan.nextLine();
-            if(y.equals("y")){
-                System.out.print("How much do you wanna deposit(has to be int): ");
-                int depnum = scan.nextInt();
-                custr.deposit(depnum);
-                scan.nextLine();
+        System.out.print("Max Deposit: ");
+        double maxDep = scan.nextDouble();
+        scan.nextLine();
+        System.out.print("Min Deposit: ");
+        double minDep = scan.nextDouble();
+        scan.nextLine();
+        System.out.print("How many years do you want to simulate: ");
+        int years = scan.nextInt();
+        scan.nextLine();
+        simulateYear(years, maxDep, minDep,cust1, custr);
+        boolean x = true;
+        System.out.print("To See Bank Statement, What Is Your Account Number: ");
+        int acNum = scan.nextInt();
+        scan.nextLine();
+        int count = 0;
+        while(x){
+            if(statement(cust1, custr, acNum)){
+                System.out.println(cust1);
             }
-            System.out.println();
-            System.out.print("Do you want to go forward a month(y is yes): ");
-            String monthly = scan.nextLine();
-            if(monthly.equals("y")){
-                custr.addSalary(cust1);
-                totMonths +=1;
-            }
-            if(totMonths % 12 == 0){
-                int x = totMonths/12;
-                custr.afterInterest(x);
-            }
-            System.out.print("Do you want to end(y is yes): ");
-            String end = scan.nextLine();
-            if (end.equals("y")){
-                statement(cust1);
-                break;
+            else{
+                count +=1;
+                System.out.println("You have " +(3-count) + " chances left.");
+                if(count == 3){
+                    System.out.print("Your Account is locked.");
+                    x = false;
+                }
             }
         }
+
+
+
+        }
+
+    public static boolean statement(Customer c1, Account a1, int acNum){
+        if(a1.getGenAccountNum() == acNum){
+            return true;
+        }
+        return false;
+
     }
-    public static void statement(Customer c1){
-        System.out.println(c1);
+    public static void simulateYear(int year, double max, double min, Customer c1, Account a1){
+        for(int i = 0; i < year*12; i++){
+            int depo = (int)(Math.random()*(max-min+1) + min);
+            a1.deposit(depo);
+            a1.addSalary(c1);
+            if(i%12 ==0){
+                a1.afterInterest(i/12);
+            }
+
+        }
 
     }
 }
