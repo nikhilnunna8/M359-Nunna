@@ -10,28 +10,13 @@ public class Customer {
         salary = s;
         accounts = x;
     }
-    public String getName(){
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public double getSalary() {
         return salary;
     }
-    public Account getAccounts() {
-        return accounts;
-    }
-
-    public void setAccounts(Account accounts) {
-        this.accounts = accounts;
-    }
-
-    public void setSalary(double salary) {
-        this.salary = salary;
-    }
+    /**
+     * Returns a string of the c1 object, with the name, salary, and account balance.
+     * @return A formatted string with the name, salary, and account balance.
+     */
     public String toString(){
         String output = "";
         output += "Name: " + name;
